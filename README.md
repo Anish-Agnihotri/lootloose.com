@@ -23,3 +23,4 @@ npm run dev
 - [loot-rarity](https://github.com/bpierre/loot-rarity) from @bpierre
 - [SVGRepo](https://www.svgrepo.com/) for project logo
 - Dom for Loot
+- [WallpaperCave](https://wallpapercave.com) for Runescape background

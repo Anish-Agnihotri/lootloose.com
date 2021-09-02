@@ -17,7 +17,9 @@ const wallets: (WalletModule | WalletInitOptions)[] = [
   { walletName: "metamask" },
   {
     walletName: "walletConnect",
-    infuraKey: process.env.NEXT_PUBLIC_INFURA_RPC,
+    rpc: {
+      ["1"]: process.env.NEXT_PUBLIC_RPC ?? "",
+    },
   },
 ];
 
@@ -103,6 +105,7 @@ function useETH() {
   return {
     provider,
     address,
+    setAddress,
     unlock,
   };
 }

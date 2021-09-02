@@ -1,5 +1,6 @@
 // Imports
 import loot from "@state/loot"; // Loot functions
+import CTA from "@components/CTA"; // CTA component
 import Layout from "@components/Layout"; // Layout wrapper
 import Bundler from "@components/Bundler"; // Bundler component
 import styles from "@styles/pages/Home.module.scss"; // Page styles
@@ -20,6 +21,13 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
+      {/* Page CTA */}
+      <CTA
+        title="Unbundle and Bundle Loot"
+        description="LootLoose lets you unbundle your Loot Bags into individual item NFTs
+          or rebundle items into their original Loot Bags."
+      />
+
       <div className={styles.home}>
         {/* Unbundle loot bags */}
         <div>

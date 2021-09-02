@@ -18,7 +18,7 @@ const BundlerAddress: string =
 
 function useLoot() {
   // Collect auth provider and user address
-  const { provider, address } = eth.useContainer();
+  const { provider, address, setAddress } = eth.useContainer();
 
   /**
    * Generates loot + bundler contract definitions
@@ -38,6 +38,16 @@ function useLoot() {
   }
 
   /**
+   * Simple work-around to refreshing all item
+   * views by triggering address refresh
+   */
+  function reloadItems(): void {
+    const tempAddr = address;
+    setAddress(null);
+    setAddress(tempAddr);
+  }
+
+  /**
    * Enables unbundling loot by sending Loot ERC721 NFT to contract
    * Loot must be owned by user to unbundle
    * @param {string} id of loot to unbundle
@@ -53,9 +63,16 @@ function useLoot() {
       }
 
       // Transfer id (quantity: 1) from user to Bundler contract
-      await loot.safeTransferFrom(address, BundlerAddress, id);
+      const tx = await loot["safeTransferFrom(address,address,uint256)"](
+        address,
+        BundlerAddress,
+        id
+      );
+      await tx.wait(1);
+      // Reload item view
+      reloadItems();
       // Toast success
-      toast.success(`Successfully unbundled loot bag #{id}`);
+      toast.success(`Successfully unbundled loot bag #${id}`);
     } catch (e) {
       // Else, toast and log error
       console.error(e);
@@ -97,10 +114,22 @@ function useLoot() {
         throw new Error("Insufficient items to reclaim bundle.");
       }
 
-      // Approve bundler to spend LootLoose
-      await bundler.setApprovalForAll(BundlerAddress, true);
+      // Check if bundler is approved
+      const alreadyApproved: boolean = await bundler.isApprovedForAll(
+        address,
+        BundlerAddress
+      );
+      if (!alreadyApproved) {
+        // Approve bundler to spend LootLoose
+        const approve = await bundler.setApprovalForAll(BundlerAddress, true);
+        await approve.wait(1);
+      }
+
       // Reassemble loot bag from bundler
-      await bundler.reassemble(id);
+      const tx = await bundler.reassemble(id);
+      await tx.wait(1);
+      // Reload item view
+      reloadItems();
       // Toast success
       toast.success(`Successfully reclaimed bag #${id}`);
     } catch (e) {

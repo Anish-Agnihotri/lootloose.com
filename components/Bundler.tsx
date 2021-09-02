@@ -1,7 +1,7 @@
 // Imports
 import eth from "@state/eth"; // ETH state
-import { useState } from "react"; // State mgmt.
 import useWallet from "@hooks/useWallet"; // Loot by wallet
+import { useEffect, useState } from "react"; // State mgmt.
 import { rarityImageFromItems } from "loot-rarity"; // Loot images
 import styles from "@styles/components/Bundles.module.scss"; // Component styles
 
@@ -37,6 +37,14 @@ export default function Bundler({
     (unbundle ? address : process.env.NEXT_PUBLIC_BUNDLER_ADDRESS) ?? ""
   );
 
+  // Reload on address change
+  useEffect(() => {
+    // Used to force collection on successful transactions
+    if (address) {
+      collect();
+    }
+  }, [address]);
+
   /**
    * Runs functionHandler() with loading toggle, passing required id params
    */
@@ -46,8 +54,7 @@ export default function Bundler({
     try {
       // Call functionHandler
       await functionHandler(bag);
-      // Recollect bags
-      collect();
+      setBag(null);
     } catch (e) {
       // Log error
       console.error(e);
@@ -69,7 +76,7 @@ export default function Bundler({
           <span className={styles.items__container_empty}>
             Please authenticate first
           </span>
-        ) : loading || buttonLoading ? (
+        ) : loading ? (
           <span className={styles.items__container_empty}>Loading...</span>
         ) : error ? (
           <span className={styles.items__container_empty}>{error}</span>
@@ -88,11 +95,13 @@ export default function Bundler({
                   key={i}
                   onClick={() => setBag(id)}
                   className={bag === id ? styles.item__selected : undefined}
+                  disabled={buttonLoading}
                 >
                   <img
                     src={rarityImageFromItems(attributeStrings)}
                     alt={`Bag #${id}`}
                   />
+                  <span>Bag #{id}</span>
                 </button>
               );
             })}
@@ -103,8 +112,8 @@ export default function Bundler({
       {/* Button states */}
       {!address ? (
         <button onClick={() => unlock()}>Authenticate</button>
-      ) : loading ? (
-        <button disabled>Loading wallet...</button>
+      ) : loading || buttonLoading ? (
+        <button disabled>Loading...</button>
       ) : error ? (
         <button disabled>{error}</button>
       ) : !bag ? (

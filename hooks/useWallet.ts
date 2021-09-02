@@ -43,9 +43,9 @@ const walletQuery = gql`
  * @returns {WalletQuery} results about wallet
  */
 export default function useWallet(address: string): WalletQuery {
-  const [data, setData] = useState([]); // Loot held
-  const [loading, setLoading] = useState(true); // Loading status
-  const [error, setError] = useState(""); // Optional error
+  const [data, setData] = useState<Record<string, string>[]>([]); // Loot held
+  const [loading, setLoading] = useState<boolean>(true); // Loading status
+  const [error, setError] = useState<string>(""); // Optional error
 
   const startLoading = () => setLoading(true); // Toggle loading true
   const stopLoading = () => setLoading(false); // Toggle loading false

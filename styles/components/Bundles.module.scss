@@ -74,6 +74,12 @@
     cursor: pointer;
     border: 3px solid transparent;
 
+    span {
+      display: block;
+      text-align: right;
+      margin: 10px;
+    }
+
     > img {
       width: 100%;
       height: 100%;

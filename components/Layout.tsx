@@ -15,7 +15,7 @@ import type { ReactElement } from "react";
 export default function Layout({
   children,
 }: {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }): ReactElement {
   return (
     <div>
@@ -24,9 +24,6 @@ export default function Layout({
 
       {/* Page header */}
       <Header />
-
-      {/* CTA section */}
-      <CTA />
 
       {/* Render page children */}
       <div>{children}</div>
@@ -121,24 +118,6 @@ function Header(): ReactElement {
               address.substr(0, 6) + "..." + address.slice(address.length - 4)
             : "Authenticate"}
         </button>
-      </div>
-    </div>
-  );
-}
-
-/**
- * Call-to-action subheader
- * @returns {ReactElement} CTA
- */
-function CTA(): ReactElement {
-  return (
-    <div className={styles.cta}>
-      <div className={styles.cta__content}>
-        <h1>Unbundle and Bundle Loot</h1>
-        <p>
-          LootLoose lets you unbundle your Loot Bags into individual item NFTs
-          or rebundle items into their original Loot Bags.
-        </p>
       </div>
     </div>
   );
