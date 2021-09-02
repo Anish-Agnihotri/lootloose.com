@@ -68,8 +68,8 @@ export default function Bundler({
       <h3>{unbundle ? "Unbundle" : "Bundle"} Items</h3>
       <p>
         {unbundle
-          ? "Unbundle loot bags into individual items."
-          : "Rebundle items into loot bags."}
+          ? "Unbundle loot bags into individual items. Choose a loot bag you own and unbundle it into 8 seperate ERC1155 NFTs, representing each item."
+          : "Rebundle individual ERC1155 items into loot bags. Choose and claim one of the available bags, given you have the necessary 8 item NFTs."}
       </p>
       <div className={styles.items__container}>
         {!address ? (
