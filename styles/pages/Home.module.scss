@@ -1,0 +1,31 @@
+.home {
+  max-width: 1600px;
+  margin: 0px auto;
+  padding: 30px 20px;
+
+  // Alignment
+  display: flex;
+  justify-content: space-between;
+  -webkit-box-pack: justify;
+  align-items: start;
+
+  > div {
+    width: auto;
+    flex: 1 1 50%;
+    display: flex;
+    padding: 0px 30px;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .home {
+    padding: 10px 20px 30px 20px;
+    flex-direction: column;
+
+    > div {
+      padding: 20px 0px;
+      width: 100%;
+    }
+  }
+}

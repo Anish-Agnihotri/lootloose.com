@@ -1,0 +1,35 @@
+* {
+  --unchained-bg: #0f1b27;
+  --unchained-gold: #c6a052;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: rgb(9, 16, 24);
+  color: white;
+  font-family: "Open Sans", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font-family: "Open Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Toast container
+.Toastify__toast {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 5px;
+  background-color: var(--unchained-bg) !important;
+  color: white !important;
+}
