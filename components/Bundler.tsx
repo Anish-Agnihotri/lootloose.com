@@ -34,7 +34,9 @@ export default function Bundler({
    */
   const { data, loading, error, collect } = useWallet(
     // If unbundle, use authed address, else contract address
-    (unbundle ? address : process.env.NEXT_PUBLIC_BUNDLER_ADDRESS) ?? ""
+    (unbundle
+      ? /*address*/ "0x0A4dE0bE3CdDe71C8D7b67f1eC8A79aa05142619"
+      : process.env.NEXT_PUBLIC_BUNDLER_ADDRESS) ?? ""
   );
 
   /**
@@ -47,7 +49,7 @@ export default function Bundler({
       // Call functionHandler
       await functionHandler(bag);
       // Recollect bags
-      collect();
+      await collect();
     } catch (e) {
       // Log error
       console.error(e);

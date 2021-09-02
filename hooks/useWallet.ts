@@ -40,7 +40,7 @@ async function collectWallets(
 
   // Collect tokens owned by address
   let tokenIds: number[] = [];
-  for (let i = 0; i < numTokens; i++) {
+  for (let i = 0; i < numTokens - 1; i++) {
     // Collect by numTokens increment
     const tokenIndex = (await loot.tokenOfOwnerByIndex(address, i)).toNumber();
     tokenIds.push(tokenIndex);
