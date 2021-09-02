@@ -32,7 +32,7 @@ function useETH() {
     // Onboard provider
     return Onboard({
       // Ethereum network
-      networkId: 1,
+      networkId: 4,
       // Hide Blocknative branding
       hideBranding: true,
       // Dark mode
