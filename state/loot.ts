@@ -53,7 +53,7 @@ function useLoot() {
       }
 
       // Transfer id (quantity: 1) from user to Bundler contract
-      await loot.safeTransferFrom(address, BundlerAddress, id, 1, "");
+      await loot.safeTransferFrom(address, BundlerAddress, id);
       // Toast success
       toast.success(`Successfully unbundled loot bag #{id}`);
     } catch (e) {
@@ -93,6 +93,7 @@ function useLoot() {
         (item: BigNumber) => item.toNumber() > 0
       );
       if (!redeemable) {
+        toast.error("Insufficient items to reclaim bundle.");
         throw new Error("Insufficient items to reclaim bundle.");
       }
 
@@ -105,9 +106,7 @@ function useLoot() {
     } catch (e) {
       // Else, log error and toast failure
       console.error(e);
-      toast.error(
-        `Error when bundling loot bag #${id}. Check console for details.`
-      );
+      toast.error(`Error when bundling loot bag #${id}.`);
     }
   }
 
