@@ -17,9 +17,13 @@ import type { ReactElement } from "react";
 export default function Bundler({
   unbundle,
   functionHandler,
+  reload,
+  setReload,
 }: {
   unbundle: boolean;
   functionHandler: Function;
+  reload: number;
+  setReload: Function;
 }): ReactElement {
   // Global providers
   const { unlock, address }: { unlock: Function; address: string | null } =
@@ -43,7 +47,7 @@ export default function Bundler({
     if (address) {
       collect();
     }
-  }, [address]);
+  }, [address, reload]);
 
   /**
    * Runs functionHandler() with loading toggle, passing required id params
@@ -55,6 +59,7 @@ export default function Bundler({
       // Call functionHandler
       await functionHandler(bag);
       setBag(null);
+      setReload(Math.floor(Math.random() * 1000));
     } catch (e) {
       // Log error
       console.error(e);

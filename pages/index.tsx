@@ -1,5 +1,6 @@
 // Imports
 import loot from "@state/loot"; // Loot functions
+import { useState } from "react"; // State management
 import CTA from "@components/CTA"; // CTA component
 import Layout from "@components/Layout"; // Layout wrapper
 import Bundler from "@components/Bundler"; // Bundler component
@@ -18,6 +19,9 @@ const Home: NextPage = () => {
     unbundleLoot,
     rebundleLoot,
   }: { unbundleLoot: Function; rebundleLoot: Function } = loot.useContainer();
+  // Quickfix: reloader
+  // This is the only temporary hack to ensure reloading cross components
+  const [reload, setReload] = useState<number>(0);
 
   return (
     <Layout>
@@ -31,12 +35,22 @@ const Home: NextPage = () => {
       <div className={styles.home}>
         {/* Unbundle loot bags */}
         <div>
-          <Bundler unbundle={true} functionHandler={unbundleLoot} />
+          <Bundler
+            unbundle={true}
+            functionHandler={unbundleLoot}
+            reload={reload}
+            setReload={setReload}
+          />
         </div>
 
         {/* Rebundle items to bags */}
         <div>
-          <Bundler unbundle={false} functionHandler={rebundleLoot} />
+          <Bundler
+            unbundle={false}
+            functionHandler={rebundleLoot}
+            reload={reload}
+            setReload={setReload}
+          />
         </div>
       </div>
     </Layout>
