@@ -27,11 +27,4 @@ npm run dev
 
 ## Disclaimer
 
-This [UI/code] is being provided as is. No guarantee, representation or
-warranty is being made, express or implied, as to the accuracy of [the
-code/UI]. It has not been audited and as such there can be no assurance
-it will work as intended and users may experience delays, failures,
-errors, omissions, loss of transmitted information or loss of funds.
-[Paradigm/The individuals who have deployed this code] are not liable
-for any of the foregoing. Users should proceed with caution and use at
-their own risk.
+These user interface and smart contracts are being provided as is. No guarantee, representation or warranty is being made, express or implied, as to the safety or correctness of the user interface or the smart contracts. They have not been audited and as such there can be no assurance they will work as intended, and users may experience delays, failures, errors, omissions, loss of transmitted information or loss of funds. Paradigm is not liable for any of the foregoing. Users should proceed with caution and use at their own risk.
