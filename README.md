@@ -1,6 +1,6 @@
 # lootloose.com
 
-LootLoose lets you unbundle your Loot Bags into individual item NFTs or rebundle items into their original Loot Bags. Front-end accompanying [@gakonst/loots-unchained](https://github.com/gakonst/loots-unchained).
+LootLoose lets you unbundle your Loot Bags into individual item NFTs or rebundle items into their original Loot Bags. Front-end accompanying [@gakonst/lootloose]( ​​https://github.com/gakonst/lootloose).
 
 ## Run locally
 
